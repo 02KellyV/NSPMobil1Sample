@@ -1,0 +1,25 @@
+package com.onnasoft.NSPMobil.views;
+
+import android.app.Application;
+import android.util.Log;
+
+import com.onnasoft.NSPMobil.PenClientCtrl;
+
+public class SampleApplication extends Application{
+	
+	@Override
+	public void onCreate() {
+		// TODO Auto-generated method stub
+		super.onCreate();
+		PenClientCtrl.getInstance( getApplicationContext() );
+		PenClientCtrl.getInstance( getApplicationContext() ).setContext(getApplicationContext());
+		PenClientCtrl.getInstance( getApplicationContext() ).registerBroadcastBTDuplicate();
+
+	}
+	
+	public void onTerminate() {
+		super.onTerminate();
+		PenClientCtrl.getInstance( getApplicationContext() ).unregisterBroadcastBTDuplicate();
+	};
+
+}

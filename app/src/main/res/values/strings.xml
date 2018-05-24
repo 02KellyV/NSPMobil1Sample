@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Smart-Pen Cercam</string>
+    <string name="action_settings">Configuración</string>
+
+    <string name="connection">Conexión</string>
+    <string name="disconnection">Desconectar</string>
+    <string name="setting">Configuración</string>
+
+    <string name="clearView">Limpiar vista</string>
+    <string name="upgrade">Actualizar Pen</string>
+    <string name="viewDot">Ver Dot</string>
+    <string name="templates">Plantillas</string>
+    <string name="offline">Mostrar data</string>
+    <string name="offline_list">Mostrar listado de data</string>
+    <string name="pen_status">Pen Estado</string>
+    <string name="pen_unpairing">Desvincular Pen</string>
+
+
+    <string name="pen_setup_auto_power">Auto Power On/Off</string>
+    <string name="pen_setup_beep">Beep On/Off</string>
+    <string name="pen_setup_password">Cambiar Password</string>
+    <string name="pen_color_1">color1</string>
+    <string name="pen_color_2">color2</string>
+
+
+    <!--  DeviceListActivity -->
+    <string name="scanning">Buscando dispositivos</string>
+    <string name="select_device">Selecciona el dispositivo</string>
+    <string name="none_paired">No se han emparejado dispositivos</string>
+    <string name="none_found">No se encontraron dispositivos</string>
+    <string name="title_paired_devices">Dispositivos emparejados</string>
+    <string name="title_other_devices">Otros dispositivos disponibles</string>
+    <string name="button_scan">Buscar dispositivos</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_templates">TemplatesActivity</string>
+</resources>
