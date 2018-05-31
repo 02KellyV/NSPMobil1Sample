@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.onnasoft.NSPMobil.PenClientCtrl;
 
-public class SampleApplication extends Application{
+public class NSPApplication extends android.app.Application{
 	
 	@Override
 	public void onCreate() {

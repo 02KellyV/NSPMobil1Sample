@@ -1,5 +1,7 @@
 package com.onnasoft.NSPMobil.views.canvas;
 
+import java.lang.invoke.MethodHandle;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import kr.neolab.sdk.graphic.Renderer;
@@ -10,12 +12,20 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.os.Build;
+import android.util.Log;
+import android.util.Size;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-public class SampleView extends SurfaceView implements SurfaceHolder.Callback
+import com.onnasoft.NSPMobil.store.Store;
+import com.onnasoft.NSPMobil.store.Subscribe;
+
+public class PaperView extends SurfaceView implements SurfaceHolder.Callback
 {
-	private SampleThread mSampleThread;
+    private SampleThread mSampleThread;
 
 	// paper background
 	private Bitmap background = null;
@@ -29,13 +39,30 @@ public class SampleView extends SurfaceView implements SurfaceHolder.Callback
 
 	private float scale = 11, offsetX = 0, offsetY = 0;
 
-	public SampleView( Context context )
+	public static Subscribe subscribe = new Subscribe(){
+	    private PaperView mPaperView;
+        @Override
+	    public void setContext(Object mPaperView) {
+	        this.mPaperView = (PaperView) mPaperView;
+        }
+        @Override
+        public void reload() {
+	        if(this.mPaperView == null) return;
+            this.mPaperView.reload();
+        }
+    };
+
+	public PaperView( Context context )
 	{
 		super( context );
 
 		getHolder().addCallback( this );
 		mSampleThread = new SampleThread( this.getHolder(), this );
-	}
+
+		subscribe.setContext(this);
+
+        Store.subscribe(subscribe);
+    }
 
 	public void setPageSize( float width, float height )
 	{
@@ -58,9 +85,25 @@ public class SampleView extends SurfaceView implements SurfaceHolder.Callback
 		offsetX = mw / 2;
 		offsetY = mh / 2;
 
-		background = Bitmap.createBitmap( docWidth, docHeight, Bitmap.Config.ARGB_8888 );
-		background.eraseColor( Color.parseColor( "#F9F9F9" ) );
+        Bitmap source = (Bitmap) Store.getState().get("template");
+        if (source != null) {
+            background = Bitmap.createBitmap(background, 0, 0, docWidth, docHeight);
+        } else {
+            background = Bitmap.createBitmap( docWidth, docHeight, Bitmap.Config.ARGB_8888 );
+            background.eraseColor( Color.parseColor( "#F9F9F9" ) );
+        }
 	}
+
+	public void reload() {
+		try {
+			Bitmap templ = (Bitmap) Store.getState().get("template");
+			if (templ == null) return;
+			background = templ;
+			Log.d("paperview", "aplica el nuevo template");
+		} catch (Exception e) {
+
+		}
+    }
 
 	@Override
 	public void draw( Canvas canvas )
@@ -69,12 +112,16 @@ public class SampleView extends SurfaceView implements SurfaceHolder.Callback
 
 		if ( background != null )
 		{
-			canvas.drawBitmap( background, offsetX, offsetY, null );
+            Rect dest = new Rect(0, 0, getWidth(), getHeight());
+            Paint paint = new Paint();
+            paint.setFilterBitmap(true);
+            canvas.drawBitmap(background, null, dest, paint);
+			//canvas.drawBitmap( background, offsetX, offsetY, null);
 		}
 
 		if ( strokes != null && strokes.size() > 0 )
 		{
-			Renderer.draw( canvas, strokes.toArray( new Stroke[0] ), scale, offsetX, offsetY );
+			Renderer.draw(canvas, strokes.toArray(new Stroke[0]), scale, offsetX, offsetY);
 		}
 	}
 
@@ -144,13 +191,13 @@ public class SampleView extends SurfaceView implements SurfaceHolder.Callback
 	public class SampleThread extends Thread
 	{
 		private SurfaceHolder surfaceholder;
-		private SampleView mSampleiView;
+		private PaperView mPaperiView;
 		private boolean running = false;
 
-		public SampleThread( SurfaceHolder surfaceholder, SampleView mView )
+		public SampleThread( SurfaceHolder surfaceholder, PaperView mView )
 		{
 			this.surfaceholder = surfaceholder;
-			this.mSampleiView = mView;
+			this.mPaperiView = mView;
 		}
 
 		public void setRunning( boolean run )
@@ -177,7 +224,7 @@ public class SampleView extends SurfaceView implements SurfaceHolder.Callback
 					{
 						if ( mCanvas != null )
 						{
-							mSampleiView.draw( mCanvas );
+							mPaperiView.draw( mCanvas );
 						}
 					}
 				}

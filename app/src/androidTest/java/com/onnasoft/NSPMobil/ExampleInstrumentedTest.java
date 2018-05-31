@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("kr.neolab.samplecode", appContext.getPackageName());
+        assertEquals("com.onnasoft.NSPMobil", appContext.getPackageName());
     }
 }

@@ -27,6 +27,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.onnasoft.NSPMobil.R;
+import com.onnasoft.NSPMobil.config.config;
+import com.onnasoft.NSPMobil.models.*;
 import com.onnasoft.NSPMobil.helper.request;
 
 import java.util.ArrayList;
@@ -47,13 +49,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
      */
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -291,10 +286,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         int IS_PRIMARY = 1;
     }
 
-    private class requesResponse {
+    private class requesResponse extends Session {
         boolean success;
-        String token;
-        com.onnasoft.NSPMobil.session session;
     }
 
     /**
@@ -318,15 +311,15 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             try {
                 data.put("email", mEmail);
                 data.put("password",  mPassword);
-                String response = request.post("/api/auth/sign-in", data);
+                String response = request.post(config.authLogin, data);
                 Gson gson = new Gson();
-                HashMap<String, String> content = new HashMap<>();
                 requesResponse r = gson.fromJson(response, requesResponse.class);
 
                 if (r.success) {
-                    Session session = Session.getInstance();
-                    r.session.token = r.token;
-                    session.setState(r.session);
+                    HashMap<String, Object> session = new HashMap<>();
+                    session.put("session", r);
+
+                    Store.setState(session);
                     return true;
                 }
             } catch (Exception e) {
@@ -339,11 +332,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
-            showProgress(false);
 
             if (success) {
                 finish();
             } else {
+                showProgress(false);
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             }

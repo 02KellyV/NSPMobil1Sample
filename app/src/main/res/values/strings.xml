@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="api">http://192.168.1.8:8000</string>
+
     <string name="app_name">Smart-Pen Cercam</string>
     <string name="action_settings">Configuración</string>
 
@@ -47,4 +49,5 @@
         completions."
     </string>
     <string name="title_activity_templates">TemplatesActivity</string>
+    <string name="logout">Salir</string>
 </resources>

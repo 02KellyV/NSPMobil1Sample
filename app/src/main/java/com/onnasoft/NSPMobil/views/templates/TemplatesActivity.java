@@ -1,15 +1,26 @@
 package com.onnasoft.NSPMobil.views.templates;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.onnasoft.NSPMobil.R;
-import com.onnasoft.NSPMobil.store.Session;
-import com.onnasoft.NSPMobil.session;
+import com.onnasoft.NSPMobil.config.config;
+import com.onnasoft.NSPMobil.helper.request;
+import com.onnasoft.NSPMobil.models.Session;
+import com.onnasoft.NSPMobil.models.Template;
+import com.onnasoft.NSPMobil.store.Store;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class TemplatesActivity extends Activity {
     ListView mTemplates ;
@@ -25,12 +36,60 @@ public class TemplatesActivity extends Activity {
 
         ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, list);
         mTemplates.setAdapter(adapter);
+
+        mTemplates.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                HashMap<String, Object> state = Store.getState();
+                List<Template> t = (List<Template>) state.get("templates");
+                HashMap<String, Object> select = new HashMap<>();
+                select.put("select", t.get(position).getName());
+                Store.setState(select);
+                try {
+                    Bitmap image = request.getBitmapFromURL("/api/templates/" + t.get(position).getName() + "/0");
+                    if (image == null) {
+                        Log.d("template", "Image is null.");
+                    }
+                    HashMap<String, Object> template = new HashMap<>();
+                    template.put("template", image);
+                    Store.setState(template);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                Log.d("item click", t.get(position).getName());
+
+                finish();
+            }
+        });
+
+
+        this.componentDidMount();
     }
 
     private void componentDidMount() {
-        session s = Session.getInstance().getState();
+        Session session = (Session) Store.getState().get("session");
+        String url = config.templatesGet + "?token=" + session.token;
 
+        Log.d("templates", url);
+        try {
+            String response = request.get(url);
+            Log.d("templates", response);
+            Gson gson = new Gson();
+            List<Template> templates = gson.fromJson(response, new TypeToken<List<Template>>(){}.getType());
+            ArrayList list = new ArrayList();
 
-        //request.get()
+            for (int i = 0; i < templates.size(); i++) {
+                Template tmp = templates.get(i);
+                list.add(tmp.getName());
+            }
+            ArrayAdapter adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, list);
+            HashMap<String, Object> m = new HashMap<>();
+            m.put("templates", templates);
+            Store.setState(m);
+            mTemplates.setAdapter(adapter);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

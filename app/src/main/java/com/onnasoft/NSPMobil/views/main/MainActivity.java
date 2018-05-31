@@ -1,6 +1,5 @@
 package com.onnasoft.NSPMobil.views.main;
 
-import java.io.File;
 import java.lang.reflect.Field;
 
 import org.json.JSONArray;
@@ -13,7 +12,7 @@ import com.onnasoft.NSPMobil.PenClientCtrl;
 import com.onnasoft.NSPMobil.R;
 import com.onnasoft.NSPMobil.Util;
 import com.onnasoft.NSPMobil.views.devices.DeviceListActivity;
-import com.onnasoft.NSPMobil.views.canvas.SampleView;
+import com.onnasoft.NSPMobil.views.canvas.*;
 import com.onnasoft.NSPMobil.views.login.LoginActivity;
 import com.onnasoft.NSPMobil.views.settings.SettingActivity;
 import com.onnasoft.NSPMobil.views.templates.TemplatesActivity;
@@ -33,6 +32,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.StrictMode;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.util.Log;
@@ -40,17 +40,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.ViewConfiguration;
-import com.onnasoft.NSPMobil.store.Session;
 
 public class MainActivity extends Activity
 {
-	public static final String TAG = "pensdk.sample";
+	public static final String TAG = "pensdk.NSPMobil";
 
 	private static final int REQUEST_CONNECT_DEVICE_SECURE = 4;
 
 	private PenClientCtrl penClientCtrl;
 
-	private SampleView mSampleView;
+	private PaperView mPaperView;
 
 	// Notification
 	protected Builder mBuilder;
@@ -65,6 +64,9 @@ public class MainActivity extends Activity
 		super.onCreate( savedInstanceState );
 
 		setContentView( R.layout.activity_main );
+
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+		StrictMode.setThreadPolicy(policy);
 
 		Intent login = new Intent(this, LoginActivity.class);
 		startActivity(login);
@@ -87,9 +89,9 @@ public class MainActivity extends Activity
 
 
 
-		mSampleView = new SampleView( this );
+		mPaperView = new PaperView( this );
 
-		setContentView( mSampleView );
+		setContentView( mPaperView );
 		
 		PendingIntent pendingIntent = PendingIntent.getBroadcast( this, 0, new Intent( "firmware_update" ), PendingIntent.FLAG_UPDATE_CURRENT );
 		 
@@ -245,6 +247,10 @@ public class MainActivity extends Activity
 
 				return true;
 
+			case R.id.action_logout:
+				finish();
+				return true;
+
 			default:
 				return super.onOptionsItemSelected( item );
 		}
@@ -264,7 +270,7 @@ public class MainActivity extends Activity
 
 	private void handleDot( int sectionId, int ownerId, int noteId, int pageId, int x, int y, int fx, int fy, int force, long timestamp, int type, int color )
 	{
-		mSampleView.addDot( sectionId, ownerId, noteId, pageId, x, y, fx, fy, force, timestamp, type, color );
+		mPaperView.addDot( sectionId, ownerId, noteId, pageId, x, y, fx, fy, force, timestamp, type, color );
 	}
 
 	private void handleMsg( int penMsgType, String content )
@@ -531,7 +537,7 @@ public class MainActivity extends Activity
 
 				if ( strokes != null )
 				{
-					mSampleView.addStrokes( strokes );
+					mPaperView.addStrokes( strokes );
 				}
 
 				// delete data file

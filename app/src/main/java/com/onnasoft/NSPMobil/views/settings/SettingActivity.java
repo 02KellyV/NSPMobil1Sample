@@ -24,7 +24,7 @@ import android.widget.EditText;
 
 public class SettingActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener
 {
-	public static final String TAG = "pensdk.sample";
+	public static final String TAG = "pensdk.NSPMobil";
 	
 	private EditTextPreference mPasswordPref;
 	
