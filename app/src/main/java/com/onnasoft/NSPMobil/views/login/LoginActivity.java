@@ -61,6 +61,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private View mLoginFormView;
 
     @Override
+    public void onBackPressed() {
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -91,8 +96,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
-        mEmailView.setText("jtorres990@gmail.com");
-        mPasswordView.setText("123456");
+        //mEmailView.setText("jtorres990@gmail.com");
+        //mPasswordView.setText("123456");
     }
 
     private void populateAutoComplete() {
@@ -327,6 +332,13 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             }
 
             return false;
+        }
+
+        public boolean onKeyDown(int keyCode, KeyEvent event) {
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                return false;
+            }
+            return true;
         }
 
         @Override

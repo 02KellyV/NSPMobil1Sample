@@ -1,5 +1,6 @@
 package com.onnasoft.NSPMobil.views.main;
 
+import java.io.File;
 import java.lang.reflect.Field;
 
 import org.json.JSONArray;
@@ -13,6 +14,7 @@ import com.onnasoft.NSPMobil.R;
 import com.onnasoft.NSPMobil.Util;
 import com.onnasoft.NSPMobil.views.devices.DeviceListActivity;
 import com.onnasoft.NSPMobil.views.canvas.*;
+import com.onnasoft.NSPMobil.views.forms.SaveActivity;
 import com.onnasoft.NSPMobil.views.login.LoginActivity;
 import com.onnasoft.NSPMobil.views.settings.SettingActivity;
 import com.onnasoft.NSPMobil.views.templates.TemplatesActivity;
@@ -123,6 +125,8 @@ public class MainActivity extends Activity
 	{
 		super.onResume();
 
+		Log.d("event", "resume");
+
 		IntentFilter filter = new IntentFilter( Broadcast.ACTION_PEN_MESSAGE );
 		filter.addAction( Broadcast.ACTION_PEN_DOT );
 		filter.addAction( "firmware_update" );
@@ -215,6 +219,11 @@ public class MainActivity extends Activity
 			case R.id.templates:
 				Intent p = new Intent(this, TemplatesActivity.class);
 				startActivities(new Intent[]{p});
+				return true;
+
+			case R.id.save:
+				Intent t = new Intent(this, SaveActivity.class);
+				startActivities(new Intent[]{t});
 				return true;
 
 			/*case R.id.action_upgrade:
@@ -588,20 +597,5 @@ public class MainActivity extends Activity
 			}
 		}
 	};
-	
-//    private BroadcastReceiver mBTDuplicateRemoveBroadcasterReceiver = new BroadcastReceiver()
-//    {
-//
-//        @Override
-//        public void onReceive ( Context context, Intent intent )
-//        {
-//            if(intent != null && intent.getAction().equals( BTDuplicateRemoveBroadcasterReceiver.ACTION_BT_CONNECTED ))
-//            {
-//                String packageName = intent.getStringExtra( BTDuplicateRemoveBroadcasterReceiver.EXTRA_BT_CONNECT_PACKAGENAME );
-//                NLog.d( "mBTDuplicateRemoveBroadcasterReceiver connect packageName="+packageName );
-//                Util.showToast( context , "packageName 에 BT가 연결되어 있는 상태입니다. packageName 에서 BT 해제후 연결시도하세요" );
-//            }
-//        }
-//    };
 
 }

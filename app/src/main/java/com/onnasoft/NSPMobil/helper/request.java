@@ -2,7 +2,6 @@ package com.onnasoft.NSPMobil.helper;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.StrictMode;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -18,20 +17,20 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 
 public class request {
     public static byte[] ImageRequest(String sUrl)  throws Exception {
-        String host = config.host;
+        String host = config.getHost();
         Log.d("request", host + sUrl);
         URL url = new URL(host + sUrl);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         InputStream in = connection.getInputStream();
         InputStreamReader isw = new InputStreamReader(in);
         BufferedReader rd = new BufferedReader(isw);
-
 
         int off = 0;
         int len = 1024;
@@ -43,10 +42,6 @@ public class request {
             content[off+i] = buff[i];
         }
 
-        //in.read(buff);
-        //Log.w("buffer", String.valueOf(buff));
-
-
         return content;
     }
 
@@ -55,14 +50,14 @@ public class request {
     public static Bitmap getBitmapFromURL(String sUrl) {
         try {
             Session session = (Session) Store.getState().get("session");
-            String host = config.host;
+            String host = config.getHost();
+            Log.d("url", host + sUrl + "?token=" + session.token);
             URL url = new URL(host + sUrl + "?token=" + session.token);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
             connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
+            InputStream in = connection.getInputStream();
+            Bitmap result = BitmapFactory.decodeStream(in);
+            return result;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -72,7 +67,7 @@ public class request {
 
 
     public static String get(String sUrl) throws Exception {
-        String host = config.host;
+        String host = config.getHost();
         Log.d("request", host + sUrl);
         URL url = new URL(host + sUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -90,8 +85,13 @@ public class request {
     }
 
     public static String post(String sUrl, HashMap<String, String> params) throws Exception {
-        String host = config.host;
-        URL url = new URL(host + sUrl);
+        String secure = "";
+        if (Store.getState().get("session") != null) {
+            Session session = (Session) Store.getState().get("session");
+            secure = "?token=" + session.token;
+        }
+        String host = config.getHost();
+        URL url = new URL(host + sUrl + secure);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
         connection.setRequestMethod("POST");
@@ -117,5 +117,25 @@ public class request {
             content += line + "\n";
         }
         return content;
+    }
+
+    public static boolean ping(String host) {
+        try {
+            URL url = new URL(host );
+            HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+            urlc.setRequestProperty("User-Agent", "Android Application: NSPMobil");
+            urlc.setRequestProperty("Connection", "close");
+            urlc.setConnectTimeout(1000 * 30); // mTimeout is in seconds
+            urlc.connect();
+
+            if (urlc.getResponseCode() == 200) {
+                return true;
+            }
+        } catch (MalformedURLException e1) {
+            e1.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

@@ -52,6 +52,12 @@ public class PaperView extends SurfaceView implements SurfaceHolder.Callback
         }
     };
 
+	private static PaperView paperView;
+
+	public static PaperView getInstance() {
+		return paperView;
+	}
+
 	public PaperView( Context context )
 	{
 		super( context );
@@ -62,9 +68,16 @@ public class PaperView extends SurfaceView implements SurfaceHolder.Callback
 		subscribe.setContext(this);
 
         Store.subscribe(subscribe);
+
+		paperView = this;
     }
 
-	public void setPageSize( float width, float height )
+
+	public Bitmap getBackgroundImage() {
+		return background;
+	}
+
+	public void setPageSize(float width, float height )
 	{
 		if ( getWidth() <= 0 || getHeight() <= 0 || width <= 0 || height <= 0 )
 		{

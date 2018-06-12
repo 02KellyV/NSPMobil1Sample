@@ -20,6 +20,10 @@
       android:title="@string/templates"
       android:showAsAction="never" />
 
+  <item android:id="@+id/save"
+      android:title="@string/save"
+      android:showAsAction="never" />
+
 
   <item android:id="@+id/action_offline"
         android:title="@string/offline"

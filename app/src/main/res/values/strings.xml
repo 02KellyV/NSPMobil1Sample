@@ -50,4 +50,6 @@
     </string>
     <string name="title_activity_templates">TemplatesActivity</string>
     <string name="logout">Salir</string>
+    <string name="save">Guardar como</string>
+    <string name="title_activity_save">SaveActivity</string>
 </resources>

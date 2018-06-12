@@ -1,6 +1,10 @@
 package com.onnasoft.NSPMobil.views;
 
 import android.app.Application;
+import android.content.BroadcastReceiver;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Handler;
 import android.util.Log;
 
 import com.onnasoft.NSPMobil.PenClientCtrl;
@@ -16,7 +20,7 @@ public class NSPApplication extends android.app.Application{
 		PenClientCtrl.getInstance( getApplicationContext() ).registerBroadcastBTDuplicate();
 
 	}
-	
+
 	public void onTerminate() {
 		super.onTerminate();
 		PenClientCtrl.getInstance( getApplicationContext() ).unregisterBroadcastBTDuplicate();

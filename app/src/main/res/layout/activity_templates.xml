@@ -10,6 +10,7 @@
         android:id="@+id/templates_list"
         android:layout_width="368dp"
         android:layout_height="503dp"
+        android:cacheColorHint="@color/colorFont"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp"
         tools:ignore="MissingConstraints" />

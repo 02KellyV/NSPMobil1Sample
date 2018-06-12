@@ -17,6 +17,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     >
     <TextView android:id="@+id/title_paired_devices"
         android:layout_width="match_parent"
@@ -51,6 +52,8 @@
     <Button android:id="@+id/button_scan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorFont"
         android:text="@string/button_scan"
     />
     

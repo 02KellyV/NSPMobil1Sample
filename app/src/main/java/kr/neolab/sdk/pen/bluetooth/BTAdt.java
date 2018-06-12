@@ -163,7 +163,13 @@ public class BTAdt implements IPenAdt
 	{
 		NLog.i( "[BTAdt] start listen" );
 
-		if ( myInstance.getBluetoothAdapter().isEnabled() && status == CONN_STATUS_IDLE )
+		BluetoothAdapter adapter = myInstance.getBluetoothAdapter();
+
+		if (adapter == null) {
+			return;
+		}
+
+		if ( adapter.isEnabled() && status == CONN_STATUS_IDLE )
 		{
 			if ( mListenThread != null )
 			{

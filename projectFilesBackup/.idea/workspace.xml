@@ -125,7 +125,7 @@
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/app/src/main/java/kr/neolab</dir>
-      <dir>$PROJECT_DIR$/app/src/main/java/kr/neolab/samplecode</dir>
+      <dir>$PROJECT_DIR$/app/src/main/java/com/onnasoft/NSPMobil</dir>
       <dir>$PROJECT_DIR$/app/src/main/java</dir>
       <dir>$PROJECT_DIR$/app/src/main/java/com/onnasoft</dir>
       <dir>$PROJECT_DIR$/app/src/main/res</dir>
@@ -2163,19 +2163,19 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/kr/neolab/samplecode/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/kr/neolab/samplecode/Session.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/kr/neolab/samplecode/PenClientCtrl.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/kr/neolab/samplecode/store/store.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/kr/neolab/samplecode/store/Store.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/kr/neolab/samplecode/store/Session.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/kr/neolab/samplecode/views/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/kr/neolab/samplecode/views/InputPasswordDialog.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/kr/neolab/samplecode/views/DeviceListActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/kr/neolab/samplecode/views/SampleView.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/kr/neolab/samplecode/views/SampleApplication.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/kr/neolab/samplecode/views/SettingActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/kr/neolab/samplecode/const/Const.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/onnasoft/NSPMobil/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/onnasoft/NSPMobil/Session.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/onnasoft/NSPMobil/PenClientCtrl.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/onnasoft/NSPMobil/store/store.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/onnasoft/NSPMobil/store/Store.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/onnasoft/NSPMobil/store/Session.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/onnasoft/NSPMobil/views/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/onnasoft/NSPMobil/views/InputPasswordDialog.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/onnasoft/NSPMobil/views/DeviceListActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/onnasoft/NSPMobil/views/SampleView.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/onnasoft/NSPMobil/views/SampleApplication.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/onnasoft/NSPMobil/views/SettingActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/onnasoft/NSPMobil/const/Const.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/onnasoft/NSPMobil/Const.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/onnasoft/NSPMobil/PenClientCtrl.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/onnasoft/NSPMobil/views/LoginActivity.java" />
@@ -2252,29 +2252,29 @@
         <subPane>
           <expand>
             <path>
-              <item name="SampleCode" type="1abcf292:AndroidViewProjectNode" />
+              <item name="NSPMobil" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
             </path>
             <path>
-              <item name="SampleCode" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-            </path>
-            <path>
-              <item name="SampleCode" type="1abcf292:AndroidViewProjectNode" />
+              <item name="NSPMobil" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="neolab" type="cbb59c9e:AndroidPsiDirectoryNode" />
             </path>
             <path>
-              <item name="SampleCode" type="1abcf292:AndroidViewProjectNode" />
+              <item name="NSPMobil" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="neolab" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="samplecode" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="SampleCode" type="1abcf292:AndroidViewProjectNode" />
+              <item name="NSPMobil" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="neolab" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="NSPMobil" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NSPMobil" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="neolab" type="cbb59c9e:AndroidPsiDirectoryNode" />
@@ -2300,7 +2300,7 @@
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.onnasoft.NSPMobil" />
       <recent name="com.onnasoft" />
-      <recent name="kr.neolab.samplecode" />
+      <recent name="com.onnasoft.NSPMobil" />
       <recent name="" />
     </key>
     <key name="android.template.packageName">
@@ -2497,9 +2497,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/kr/neolab/samplecode/store/store.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/kr/neolab/samplecode/Session.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/kr/neolab/samplecode/const/Const.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onnasoft/NSPMobil/store/store.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onnasoft/NSPMobil/Session.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/onnasoft/NSPMobil/const/Const.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_launcher_n.png">
       <provider selected="true" editor-type-id="images" />
     </entry>

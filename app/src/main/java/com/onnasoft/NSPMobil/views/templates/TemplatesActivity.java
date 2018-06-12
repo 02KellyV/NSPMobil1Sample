@@ -18,6 +18,15 @@ import com.onnasoft.NSPMobil.models.Session;
 import com.onnasoft.NSPMobil.models.Template;
 import com.onnasoft.NSPMobil.store.Store;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,30 +49,35 @@ public class TemplatesActivity extends Activity {
         mTemplates.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                HashMap<String, Object> state = Store.getState();
-                List<Template> t = (List<Template>) state.get("templates");
-                HashMap<String, Object> select = new HashMap<>();
-                select.put("select", t.get(position).getName());
-                Store.setState(select);
-                try {
-                    Bitmap image = request.getBitmapFromURL("/api/templates/" + t.get(position).getName() + "/0");
-                    if (image == null) {
-                        Log.d("template", "Image is null.");
-                    }
-                    HashMap<String, Object> template = new HashMap<>();
-                    template.put("template", image);
-                    Store.setState(template);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                Log.d("item click", t.get(position).getName());
-
-                finish();
+                onTemplateClick(parent, view, position, id);
             }
         });
 
 
         this.componentDidMount();
+    }
+
+    public void onTemplateClick(AdapterView<?> parent, View view, int position, long id) {
+        HashMap<String, Object> state = Store.getState();
+        List<Template> t = (List<Template>) state.get("templates");
+        HashMap<String, Object> select = new HashMap<>();
+        select.put("select", t.get(position).getName());
+        Store.setState(select);
+        try {
+            String encode = URLEncoder.encode(t.get(position).getName(), "UTF-8");
+            Bitmap image = request.getBitmapFromURL("/api/templates/" + encode + "/0");
+            if (image == null) {
+                Log.d("template", "Image is null.");
+            }
+            HashMap<String, Object> template = new HashMap<>();
+            template.put("template", image);
+            Store.setState(template);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.d("item click", t.get(position).getName());
+
+        finish();
     }
 
     private void componentDidMount() {
